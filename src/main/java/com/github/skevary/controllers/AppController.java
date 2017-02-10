@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -39,7 +40,7 @@ public class AppController {
     }
 
     //-------------------Create a new Article--------------------------------------------------------
-
+    @Secured({"USER" ,"ROLE_ADMIN" })
     @RequestMapping(value = "/content", method = RequestMethod.POST)
     public ResponseEntity<Void> createArticle(@RequestBody Article article, UriComponentsBuilder ucBuilder) {
         System.out.println("Creating Article " + article.getTitle());
@@ -54,7 +55,7 @@ public class AppController {
     }
 
     //------------------- Update a Article --------------------------------------------------------
-
+    @Secured({"USER" ,"ROLE_ADMIN" })
     @RequestMapping(value = "/content/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Article> updateArticle(@PathVariable("id") long id, @RequestBody Article article) {
         System.out.println("Updating Article " + id);
@@ -74,7 +75,7 @@ public class AppController {
     }
 
     //------------------- Delete a Article --------------------------------------------------------
-
+    @Secured({ "ROLE_ADMIN" })
     @RequestMapping(value = "/content/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Article> deleteArticle(@PathVariable("id") long id) {
         System.out.println("Deleting Article with id " + id);
@@ -102,7 +103,7 @@ public class AppController {
     }
 
     //-------------------Create a new Comment by Article--------------------------------------------------------
-
+    @Secured({"USER" ,"ROLE_ADMIN" })
     @RequestMapping(value = "/content/{id}/comments", method = RequestMethod.POST)
     public ResponseEntity<Void> createComment(@PathVariable("id") long id, @RequestBody Comment comment, UriComponentsBuilder ucBuilder) {
         if (!contentService.isArticleExist(id)) {
@@ -118,7 +119,7 @@ public class AppController {
     }
 
     //------------------- Update a Comment --------------------------------------------------------
-
+    @Secured({"USER" ,"ROLE_ADMIN" })
     @RequestMapping(value = "/content/{id}/comments/{commId}", method = RequestMethod.PUT)
     public ResponseEntity<Comment> updateComment(@PathVariable("id") long id, @PathVariable("commId") long commId, @RequestBody Comment comment) {
         if (!contentService.isArticleExist(id)) {
@@ -141,7 +142,7 @@ public class AppController {
     }
 
     //------------------- Delete a Comment --------------------------------------------------------
-
+    @Secured({ "ROLE_ADMIN" })
     @RequestMapping(value = "/content/{id}/comments/{commId}", method = RequestMethod.DELETE)
     public ResponseEntity<Comment> deleteComment(@PathVariable("id") long id,@PathVariable("commId") long commId) {
         if (!contentService.isArticleExist(id)) {
