@@ -1,5 +1,5 @@
 #RestService
-
+##Test task
 
 --------
 
@@ -22,17 +22,21 @@
 ##Task
 
 **1.level** (RESTFul API): 
-_src>main>java> com>github>skevary> controllers>AppController.java
-src>main>java> com>github>skevary> service>ContentServiceImpl.java_
+
+_src>main>java> com>github>skevary> controllers>AppController.java_
+
+_src>main>java> com>github>skevary> service>ContentServiceImpl.java_
 
 ========
 
 **2.level** (Authorization, the role USER,ADMIN):
+
 _src>main>java> com>github>skevary> config>AppSecurityConfig.java_
 
 ========
 
 **3.level** (Frontend):
+
 _src>main>webapp>view> In the process**_
 
 --------
